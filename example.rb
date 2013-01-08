@@ -4,7 +4,8 @@ include Commutateurs
 
 credentials = Credentials.new("login", "password", "enable")
 
-device = Cisco.new("hostname", credentials)
+verbose = true
+device = Cisco.new("hostname", credentials, verbose)
 device.connect
 device.enable
 

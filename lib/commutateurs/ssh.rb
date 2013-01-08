@@ -5,7 +5,7 @@ module Commutateurs
     attr_accessor :user, :password, :host, :port
     attr_accessor :default_prompt, :timeout
 
-    def initialize(verbose = false)
+    def initialize(verbose)
       @timeout = 10
       @verbose = verbose
     end

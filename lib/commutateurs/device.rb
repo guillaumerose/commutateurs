@@ -9,10 +9,10 @@ module Commutateurs
   end
 
   class Base
-    def initialize(host, credentials)
+    def initialize(host, credentials, verbose = false)
       @enable = credentials.enable
 
-      @transport = Ssh.new
+      @transport = Ssh.new(verbose)
       @transport.host = host
       @transport.user = credentials.user
       @transport.password = credentials.password
@@ -24,7 +24,7 @@ module Commutateurs
   end
 
   class Cisco < Base
-    def initialize(host, credentials)
+    def initialize(host, credentials, verbose = false)
       super
       @transport.default_prompt = /[#>]\s?\z/n
     end
@@ -54,7 +54,7 @@ module Commutateurs
   end
 
   class H3c < Base
-    def initialize(host, credentials)
+    def initialize(host, credentials, verbose = false)
       super
       @transport.default_prompt = /(<.*>|\[.*\])$/
     end
