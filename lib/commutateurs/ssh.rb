@@ -21,7 +21,7 @@ module Commutateurs
       @output = []
       @channel_data = ""
 
-      @ssh = Net::SSH.start(host, user, :port => port, :password => password, :timeout => timeout)
+      @ssh = Net::SSH.start(host, user, :port => port, :password => password, :timeout => timeout, :paranoid => Net::SSH::Verifiers::Null.new)
 
       @buf = ""
       @eof = false
