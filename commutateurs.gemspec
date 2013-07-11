@@ -1,7 +1,7 @@
 # encoding: utf-8
 Gem::Specification.new do |gem|
   gem.name = "commutateurs"
-  gem.version = "0.0.8"
+  gem.version = "0.0.9"
   gem.date = "2013-02-01"
   gem.authors = ["Guillaume Rose"]
   gem.email = "guillaume.rose@gmail.com"
@@ -14,4 +14,5 @@ Gem::Specification.new do |gem|
                "lib/commutateurs.rb"]
 
   gem.add_dependency('net-ssh')
+  gem.license = 'MIT'
 end
