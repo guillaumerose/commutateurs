@@ -23,6 +23,38 @@ module Commutateurs
     end
   end
 
+  class HP < Base
+    def initialize(host, credentials, verbose = false)
+      super
+      @transport.default_prompt = /(Press any key to continue|# )/
+    end
+
+    def connect
+      @transport.connect
+      @transport.command("\n")
+      @transport.command("terminal length 1000")
+    end
+
+    def configuration
+      execute('write term')
+    end
+
+    def save
+      raise "Not implemented yet"
+    end
+
+    def disconnect
+      @transport.send 'exit'
+      @transport.close
+    end
+
+    def execute(arg)
+      cleaned = ""
+      super(arg).each_byte { |x|  cleaned << x unless x > 127   }
+      cleaned
+    end
+  end
+
   class Cisco < Base
     def initialize(host, credentials, verbose = false)
       super
