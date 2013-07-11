@@ -27,6 +27,7 @@ module Commutateurs
     def initialize(host, credentials, verbose = false)
       super
       @transport.default_prompt = /(Press any key to continue|# )/
+      @transport.debug = Proc.new { |line| $stderr.print(Commutateurs.clean(line)) }
     end
 
     def connect
@@ -49,9 +50,7 @@ module Commutateurs
     end
 
     def execute(arg)
-      cleaned = ""
-      super(arg).each_byte { |x|  cleaned << x unless x > 127   }
-      cleaned
+      Commutateurs.clean(super(arg))
     end
   end
 
@@ -139,5 +138,11 @@ module Commutateurs
       @transport.send 'exit'
       @transport.close
     end
+  end
+
+  def clean(arg)
+    cleaned = ""
+    (arg || "").each_byte { |x|  cleaned << x unless x > 127   }
+    cleaned
   end
 end
