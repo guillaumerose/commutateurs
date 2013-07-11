@@ -36,6 +36,10 @@ module Commutateurs
       @transport.command("terminal length 1000")
     end
 
+    def enable
+
+    end
+
     def configuration
       execute('write term')
     end
