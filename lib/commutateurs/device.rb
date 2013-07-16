@@ -156,7 +156,7 @@ module Commutateurs
   class Fortigate < Base
     def initialize(host, credentials, verbose = false)
       super
-      @transport.default_prompt = / # $/
+      @transport.default_prompt = / [#\$] $/
     end
 
     def enable
