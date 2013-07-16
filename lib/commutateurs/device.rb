@@ -104,11 +104,11 @@ module Commutateurs
     def enable
       @transport.command('super', :prompt => /Password:/)
       @transport.command(@enable)
+      @transport.command('screen-length disable')
     end
 
     def connect
       @transport.connect
-      @transport.command('screen-length disable')
     end
 
     def configuration
