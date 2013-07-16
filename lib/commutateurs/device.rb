@@ -23,6 +23,7 @@ module Commutateurs
     end
   end
 
+  # Work in progress
   class HP < Base
     def initialize(host, credentials, verbose = false)
       super
@@ -139,6 +140,33 @@ module Commutateurs
     end
 
     def configuration
+      execute('get config')
+    end
+
+    def save
+    end
+
+    def disconnect
+      @transport.send 'exit'
+      @transport.close
+    end
+  end
+
+  class Fortigate < Base
+    def initialize(host, credentials, verbose = false)
+      super
+      @transport.default_prompt = / # $/
+    end
+
+    def enable
+    end
+
+    def connect
+      @transport.connect
+    end
+
+    def configuration
+      execute('show')
     end
 
     def save
