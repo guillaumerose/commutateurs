@@ -108,6 +108,7 @@ module Commutateurs
 
     def connect
       @transport.connect
+      @transport.command('screen-length disable')
     end
 
     def configuration
