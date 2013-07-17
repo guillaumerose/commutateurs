@@ -46,7 +46,7 @@ module Commutateurs
     end
 
     def save
-      raise "Not implemented yet"
+      execute('write memory')
     end
 
     def disconnect
