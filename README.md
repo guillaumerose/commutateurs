@@ -3,6 +3,14 @@ commutateurs
 
 A simple gem to manage network switches
 
+Supported devices
+----------------
+
+* Cisco Catalyst
+* H3c
+* Juniper SSG
+* HP Procurve (in progress)
+* Fortigate
 
 Examples
 --------
