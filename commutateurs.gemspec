@@ -9,7 +9,13 @@ Gem::Specification.new do |gem|
   gem.description = "Library for accessing commutateurs"
   gem.homepage = "http://www.github.com/guillaumerose/commutateurs"
 
-  gem.files = ["lib/commutateurs/device.rb",
+  gem.files = ["lib/commutateurs/base.rb",
+               "lib/commutateurs/cisco.rb",
+               "lib/commutateurs/credentials.rb",
+               "lib/commutateurs/fortigate.rb",
+               "lib/commutateurs/h3c.rb",
+               "lib/commutateurs/hp.rb",
+               "lib/commutateurs/juniper.rb",
                "lib/commutateurs/ssh.rb",
                "lib/commutateurs.rb"]
 
