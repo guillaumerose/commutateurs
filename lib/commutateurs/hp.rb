@@ -8,14 +8,14 @@ module Commutateurs
       # hpuifilter.c used by rancid - https://github.com/dotwaffle/rancid-git/blob/master/bin/hpuifilter.c#L534
       @transport.filter = Proc.new do |line| 
         line.gsub(/\e\[2K|\e\[2J|\e\[\?7l|\e\[\?6l|\e\[[0-9]+;[0-9]+r|\e\[[0-9]+;[0-9]+H|\e\[\?25l|\e\[\?25h/, "")
-            .gsub(/\eE/, "\n") 
+            .gsub(/\eE|\n\r|\r\n/, "\n") 
       end
     end
 
     def connect
       @transport.connect
-      @transport.command("\n")
-      @transport.command("terminal length 1000")
+      execute("")
+      execute("terminal length 1000")
     end
 
     def enable
