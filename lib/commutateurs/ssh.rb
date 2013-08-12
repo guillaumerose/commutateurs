@@ -3,12 +3,12 @@
 module Commutateurs
   class Ssh
     attr_accessor :user, :password, :host, :port
-    attr_accessor :default_prompt, :timeout, :debug
+    attr_accessor :default_prompt, :timeout, :filter
 
     def initialize(verbose)
       @timeout = 10
       @verbose = verbose
-      @debug = Proc.new { |line| $stderr.print(line) }
+      @filter = Proc.new { |line| line }
     end
 
     def command(cmd, options = {})
@@ -34,11 +34,16 @@ module Commutateurs
           raise "failed to open ssh shell channel" unless success
 
           ch.on_data { |ch,data|
-            # p data
-            @debug.call(data) if @verbose
-            @buf << data
+            # p @filter.call(data)
+            $stderr.puts(@filter.call(data)) if @verbose
+            @buf << @filter.call(data)
           }
-          ch.on_extended_data { |ch,type,data| @debug.call(data) if type == 1; @buf << data if type == 1 }
+          ch.on_extended_data { |ch,type,data|
+            if type == 1
+              $stderr.puts(@filter.call(data)) if @verbose
+              @buf << @filter.call(data)
+            end
+          }
           ch.on_close { @eof = true }
 
           @channel = ch

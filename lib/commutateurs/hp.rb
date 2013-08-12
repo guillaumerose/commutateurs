@@ -4,7 +4,12 @@ module Commutateurs
     def initialize(host, credentials, verbose = false)
       super
       @transport.default_prompt = /(Press any key to continue|# )/
-      @transport.debug = Proc.new { |line| $stderr.print(clean(line)) }
+
+      # hpuifilter.c used by rancid - https://github.com/dotwaffle/rancid-git/blob/master/bin/hpuifilter.c#L534
+      @transport.filter = Proc.new do |line| 
+        line.gsub(/\e\[2K|\e\[2J|\e\[\?7l|\e\[\?6l|\e\[[0-9]+;[0-9]+r|\e\[[0-9]+;[0-9]+H|\e\[\?25l|\e\[\?25h/, "")
+            .gsub(/\eE/, "\n") 
+      end
     end
 
     def connect
@@ -28,16 +33,6 @@ module Commutateurs
     def disconnect
       @transport.send 'exit'
       @transport.close
-    end
-
-    def execute(arg)
-      clean(super(arg))
-    end
-
-    def clean(arg)
-      cleaned = ""
-      (arg || "").each_byte { |x|  cleaned << x unless x > 127   }
-      cleaned
     end
   end
 end
