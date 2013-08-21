@@ -3,7 +3,7 @@
 module Commutateurs
   class Ssh
     attr_accessor :user, :password, :host, :port
-    attr_accessor :default_prompt, :timeout, :filter
+    attr_accessor :default_prompt, :timeout, :filter, :more
 
     def initialize(verbose)
       @timeout = 10
@@ -77,6 +77,11 @@ module Commutateurs
         IO::select([sock], [sock], nil, nil)
 
         process_ssh
+
+        if more && @buf =~ more
+          @buf = @buf.gsub(more, "")
+          send(" ")
+        end
 
         if @buf != ""
           line += @buf.gsub(/\r\n/no, "\n")

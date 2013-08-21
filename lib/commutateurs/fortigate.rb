@@ -3,6 +3,7 @@ module Commutateurs
     def initialize(host, credentials, verbose = false)
       super
       @transport.default_prompt = / [#\$] $/
+      @transport.more = /--More-- /
     end
 
     def enable
