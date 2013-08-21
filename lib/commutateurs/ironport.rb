@@ -3,7 +3,8 @@ module Commutateurs
     def initialize(host, credentials, verbose = false)
       super
       @transport.default_prompt = /> $/
-      @transport.more = /-Press Any Key For More-/
+      @transport.filter = Proc.new { |line| line.gsub(/\r\s*\r/, "") }
+      @transport.more = /-Press Any Key For More-$/
     end
 
     def enable
