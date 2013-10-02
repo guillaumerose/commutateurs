@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
                "lib/commutateurs/juniper.rb",
                "lib/commutateurs/brocade.rb",
                "lib/commutateurs/ironport.rb",
+               "lib/commutateurs/asa.rb",
                "lib/commutateurs/ssh.rb",
                "lib/commutateurs.rb"]
 

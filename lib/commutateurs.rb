@@ -14,3 +14,5 @@ require_relative './commutateurs/hp'
 require_relative './commutateurs/juniper'
 require_relative './commutateurs/brocade'
 require_relative './commutateurs/ironport'
+require_relative './commutateurs/asa'
+
